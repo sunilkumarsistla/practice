@@ -4,7 +4,7 @@ function main(input) {
     //Enter your code here
 	var i=0, cnt = {a: 0, b: 0, c: 0};
 	
-	for(i=0;i<input,length;i++) {
+	for(i=0;i<input.length;i++) {
 		if(input[i] === 'a') {
 			cnt.a = cnt.a << 1;
 			cnt.a = cnt.a + 1;
