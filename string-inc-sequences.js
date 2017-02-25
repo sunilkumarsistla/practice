@@ -7,7 +7,7 @@ function main(input) {
 	for(i=0;i<input,length;i++) {
 		if(input[i] === 'a') {
 			cnt.a = cnt.a << 1;
-			cnt.a++;
+			cnt.a = cnt.a + 1;
 		} else if(input[i] === 'b') {
 			cnt.b = cnt.b << 1;
 			cnt.b += cnt.a;
