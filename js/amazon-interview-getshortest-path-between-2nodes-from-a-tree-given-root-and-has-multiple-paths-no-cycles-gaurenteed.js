@@ -14,9 +14,11 @@ function node(val) {
 }
 
 function GetArrStr(arr) {
-    var res = "";
-    for (var i = 0; i < arr.length; i++) {
-        res += arr[i] + " ";
+    var res = "", i;
+    if(!arr) return res;
+    
+    for (i = 0; i < arr.length ; i++) {
+        res += (arr[i] >= 0 ? arr[i] : "-") + " ";
     }
     return res.trim();
 }
@@ -82,6 +84,48 @@ function GetShortestPathBetweenNodes(root, id1, id2) {
     return GetArrStr(shortestPath);
 }
 
+function GetShortestPathWithGraph(root, id1, id2) {
+	if(!root) return null;
+	if(id1 === id2) return [id1];
+	
+	var graphLookup = [];
+	var q = [root], cN, i;
+	while(q.length > 0) {
+		cN = q.shift();
+		graphLookup[cN.value] = graphLookup[cN.value] || [];
+		for(i=0; i < cN.children.length;i++) {
+			graphLookup[cN.children[i].value] = graphLookup[cN.children[i].value] || [];
+			graphLookup[cN.children[i].value][cN.value] = 1;
+			graphLookup[cN.value][cN.children[i].value] = 1;
+			q.push(cN.children[i]);
+		}
+	}
+	if(!graphLookup[id1] || !graphLookup[id2]) return null;
+	
+	var hierarchy = [];
+	q = [id1];
+	hierarchy[id1] = 0;
+	while(q.length > 0) {
+		cN = q.shift();
+		for(i=0; i < graphLookup[cN].length;i++) {
+			if(graphLookup[cN][i] && !hierarchy[i]) {
+				hierarchy[i] = cN;
+				q.push(i);
+			}
+			if(i === id2) break;
+		}
+	}
+	
+	q = [];
+	cN = id2;
+	do {
+		q.unshift(cN);
+		cN = hierarchy[cN];
+	} while(q[0] !== id1 && cN > 0);
+	
+	return GetArrStr(q, true);
+}
+
 function main() {
     var i;
 	var node1 = new node(1);
@@ -120,8 +164,10 @@ function main() {
 	node12.addChild(node13);		
     var id1 = 10, id2 = 13;
     console.log(id1 + " to " + id2 + ": " + GetShortestPathBetweenNodes(node1, id1, id2));
+    console.log("Graph: " + id1 + " to " + id2 + ": " + GetShortestPathWithGraph(node1, id1, id2));
     id1= 11;
     console.log(id1 + " to " + id2 + ": " + GetShortestPathBetweenNodes(node1, id1, id2));
+    console.log("Graph: " + id1 + " to " + id2 + ": " + GetShortestPathWithGraph(node1, id1, id2));
     
 }
 main();
