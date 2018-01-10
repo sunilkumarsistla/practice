@@ -36,6 +36,21 @@ function BFS(root) {
 	}
 }
 
+function BFS2(root) {
+    if(!root) return root;
+    var result = [], q = [];
+    q.push(root);
+    while(q && q.length > 0) {
+        let n = q.shift();
+        if(n.left) q.push(n.left);
+        if(n.right) q.push(n.right);
+        
+        result.push(n.data);
+    }
+	console.log(result);
+    return result;
+}
+
 function formBinaryTree() {	
     var root = new node(1);
     root.left = new node(2);
