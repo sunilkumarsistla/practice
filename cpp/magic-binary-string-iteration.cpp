@@ -1,3 +1,6 @@
+
+// https://www.geeksforgeeks.org/find-ith-index-character-in-a-binary-string-obtained-after-n-iterations/
+
 #include<iostream>
 #include<vector>
 #include<math.h>
