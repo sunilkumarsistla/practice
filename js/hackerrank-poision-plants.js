@@ -60,30 +60,32 @@ function greedy(input) {
     console.log(--d);
 } 
 
-function optimized(input) {
-    input = input.split("\n").map(function(a){ return a.split(" ").map(Number);});
-    var len = input[0][0]; pest = input[1];
-    var maxD = 0, currD = 0, stk = [], minP = pest[0], currP = pest[0];
+function optimized(len, pest) {
+    var maxD = 0, currD = 0, stk = [];
         
     for(var i=0;i<len;i++) {
         currD = 0;
         while(stk.length > 0 && pest[i] <= stk[stk.length-1].p) {
             currD = max(currD, stk.pop().d);
+            console.log('w:', i, currD, maxD, stk);
         }
         if(stk.length == 0) currD = 0; else currD++;
         maxD = max(currD, maxD);
-        stk.push({d: currD, p: pest[i]});
+        stk.push({ d: currD, p: pest[i] });
+        console.log('f:', i, currD, maxD, stk);
     }
     console.log(maxD);
 } 
 
-process.stdin.resume();
-process.stdin.setEncoding("ascii");
-_input = "";
-process.stdin.on("data", function (input) {
-    _input += input;
-});
+// process.stdin.resume();
+// process.stdin.setEncoding("ascii");
+// _input = "";
+// process.stdin.on("data", function (input) {
+//     _input += input;
+// });
 
-process.stdin.on("end", function () {
-   optimized(_input);
-});
+// process.stdin.on("end", function () {
+//    var input = _input.split("\n").map(function(a){ return a.split(" ").map(Number);});
+//    optimized(input[0][0], input[1]);
+// });
+optimized(7, [6,5,8,4,7,10,9]);
