@@ -65,5 +65,5 @@ var getSumOfSubMatrixSpaceOpt = function(s, k) {
     return s.slice(k-1).map(r => r.slice(k-1));
 };
 
-console.log(getSumOfSubMatrix([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]], 2));
-console.log(getSumOfSubMatrixSpaceOpt([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]], 2));
+console.log(getSumOfSubMatrix([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]], 4));
+console.log(getSumOfSubMatrixSpaceOpt([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]], 4));
