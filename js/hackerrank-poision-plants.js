@@ -61,9 +61,9 @@ function greedy(input) {
 } 
 
 function optimized(len, pest) {
-    var maxD = 0, currD = 0, stk = [];
+    let maxD = 0, currD = 0, stk = [];
         
-    for(var i=0;i<len;i++) {
+    for(let i=0;i<len;i++) {
         currD = 0;
         while(stk.length > 0 && pest[i] <= stk[stk.length-1].p) {
             currD = max(currD, stk.pop().d);
@@ -88,4 +88,4 @@ function optimized(len, pest) {
 //    var input = _input.split("\n").map(function(a){ return a.split(" ").map(Number);});
 //    optimized(input[0][0], input[1]);
 // });
-optimized(7, [6,5,8,4,7,10,9]);
+optimized(8, [6,5,8,9,4,7,10,9]);
